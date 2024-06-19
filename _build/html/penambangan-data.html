@@ -1,0 +1,3595 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>GAUSSSIAN NAIVE BAYES CLASSIFICATION FOR PREDICTION ON RICE (OSMANCIK AND CAMMEO) &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'penambangan-data';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="About The Author" href="author.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    GAUSSSIAN NAIVE BAYES CLASSIFICATION FOR PREDICTION ON RICE (OSMANCIK AND CAMMEO)
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="author.html">About The Author</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fpenambangan-data.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/penambangan-data.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>GAUSSSIAN NAIVE BAYES CLASSIFICATION FOR PREDICTION ON RICE (OSMANCIK AND CAMMEO)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">GAUSSSIAN NAIVE BAYES CLASSIFICATION FOR PREDICTION ON RICE (OSMANCIK AND CAMMEO)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">TUJUAN</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">DATA UNDERSTANDING</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengumpulkan-data">MENGUMPULKAN DATA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-data">Mencari Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menarik-data">Menarik Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memahami-data">MEMAHAMI DATA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-data">Deskripsi Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-fitur">Penjelasan Fitur</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-data">PLOTTING DATA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-distribution">Data Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-distribution">2D Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data">EKSPLORASI DATA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kualitas-data">KUALITAS DATA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-value">Missing Value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier-data">Outlier Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">DATA PREPROCESSING</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-outlier-factor">Local Outlier Factor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-outliers">Check Outliers</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-modeling">DATA MODELING</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-naive-bayes-classification">GAUSSIAN NAIVE BAYES CLASSIFICATION</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knn">KNN</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-learning">ENSEMBLE LEARNING</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacking-classifier">Stacking Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-knn-model-with-n-3">Make KNN model with n = 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-knn-model-with-n-5">Make KNN model with n = 5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#change-categorical-to-numeric">Change categorical to numeric</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-gaussian-naives-bayes-as-meta-classifiers">Modelling Gaussian Naives Bayes as Meta Classifiers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-prediction-function">Make prediction function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-test">Prediction test</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-classifier">Bagging Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-bootstrap-sample-data">Make bootstrap sample data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-with-naives-bayes">Modelling with Naives Bayes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Change categorical to numeric</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-aggregation">Make aggregation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Make prediction function</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi">Evaluasi</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="gausssian-naive-bayes-classification-for-prediction-on-rice-osmancik-and-cammeo">
+<h1>GAUSSSIAN NAIVE BAYES CLASSIFICATION FOR PREDICTION ON RICE (OSMANCIK AND CAMMEO)<a class="headerlink" href="#gausssian-naive-bayes-classification-for-prediction-on-rice-osmancik-and-cammeo" title="Link to this heading">#</a></h1>
+<p>Beras merupakan salah satu sumber karbohidrat utama bagi sebagian besar populasi di dunia, termasuk di Indonesia. Dalam beberapa tahun terakhir, permintaan akan beras jenis tertentu yang memiliki kualitas dan karakteristik yang unggul semakin meningkat. Dua jenis beras yang sedang populer dan diminati adalah beras Osmancik dan beras Cameo.</p>
+<p>Beras Osmancik berasal dari Turki dan dikenal memiliki biji yang panjang, aroma yang harum, serta kualitas yang sangat baik. Beras ini memiliki daya serap air yang rendah sehingga hasil masaknya lebih pulen dan tidak lengket. Karena kualitasnya yang baik, beras Osmancik sering digunakan untuk sajian khusus dan dianggap sebagai beras premium.</p>
+<p>Beras Cameo juga merupakan beras berkualitas tinggi yang berasal dari Italia. Beras ini memiliki biji yang panjang dan ramping dengan warna putih bersih. Karakteristiknya yang unggul antara lain tekstur yang lembut, rasa yang enak, serta mudah diolah menjadi berbagai hidangan. Beras Cameo sering digunakan untuk membuat risotto, hidangan khas Italia yang terkenal.</p>
+<section id="tujuan">
+<h2>TUJUAN<a class="headerlink" href="#tujuan" title="Link to this heading">#</a></h2>
+<p>Percobaan klasifikasi beras Osmancik dan Cameo bertujuan untuk mengidentifikasi dan membedakan antara kedua jenis beras ini berdasarkan karakteristik fisiknya. Metode klasifikasi yang umum digunakan adalah analisis citra digital menggunakan teknik pengolahan citra dan pembelajaran mesin. Dengan melakukan percobaan ini, diharapkan dapat membantu dalam pengembangan sistem identifikasi beras yang cepat, akurat, dan otomatis. dianggap sebagai beras premium.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span> 
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">LocalOutlierFactor</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">StackingClassifier</span> <span class="c1">#</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-understanding">
+<h1>DATA UNDERSTANDING<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h1>
+<p>Data Understanding atau memahami data adalah sebuah tahapan di dalam metodologi sains data dan pengembangan AI yang bertujuan untuk mendapatkan pemahaman awal mengenai data yang dibutuhkan untuk memecahkan permasalahan yang diberikan. Pada case kali ini kita akan memahami Dataset Rice (Cammeo and Osmancik).</p>
+<section id="mengumpulkan-data">
+<h2>MENGUMPULKAN DATA<a class="headerlink" href="#mengumpulkan-data" title="Link to this heading">#</a></h2>
+<section id="mencari-data">
+<h3>Mencari Data<a class="headerlink" href="#mencari-data" title="Link to this heading">#</a></h3>
+<p>Tahapan pertama pada mengumpulkan data adalah dengan mencari dataset yang akan kita gunakan, sesuai penjelasan di atas kita akan menggunakan Dataset Rice (Cammeo and Osmancik) yang bersumber dari:</p>
+<p><a class="reference external" href="https://archive.ics.uci.edu/dataset/545/rice+cammeo+and+osmancik">https://archive.ics.uci.edu/dataset/545/rice+cammeo+and+osmancik</a></p>
+</section>
+<section id="menarik-data">
+<h3>Menarik Data<a class="headerlink" href="#menarik-data" title="Link to this heading">#</a></h3>
+<p>Setelah kita mendapatkan data yang sesuai, selanjutnya kita upload data tersebut ke drive atau database yang kita miliki. Kemudian kami integrasikan dataset tersebut ke notebooks yang kami gunakan dengan tujuan akan memudahkan akses sesama anggota kelompok.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;Rice_Cammeo_Osmancik.xlsx&#39;</span><span class="p">)</span>
+
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Area</th>
+      <th>Perimeter</th>
+      <th>Major_Axis_Length</th>
+      <th>Minor_Axis_Length</th>
+      <th>Eccentricity</th>
+      <th>Convex_Area</th>
+      <th>Extent</th>
+      <th>Class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>15231</td>
+      <td>525.578979</td>
+      <td>229.749878</td>
+      <td>85.093788</td>
+      <td>0.928882</td>
+      <td>15617</td>
+      <td>0.572896</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>14656</td>
+      <td>494.311005</td>
+      <td>206.020065</td>
+      <td>91.730972</td>
+      <td>0.895405</td>
+      <td>15072</td>
+      <td>0.615436</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>14634</td>
+      <td>501.122009</td>
+      <td>214.106781</td>
+      <td>87.768288</td>
+      <td>0.912118</td>
+      <td>14954</td>
+      <td>0.693259</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>13176</td>
+      <td>458.342987</td>
+      <td>193.337387</td>
+      <td>87.448395</td>
+      <td>0.891861</td>
+      <td>13368</td>
+      <td>0.640669</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>14688</td>
+      <td>507.166992</td>
+      <td>211.743378</td>
+      <td>89.312454</td>
+      <td>0.906691</td>
+      <td>15262</td>
+      <td>0.646024</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3805</th>
+      <td>11441</td>
+      <td>415.858002</td>
+      <td>170.486771</td>
+      <td>85.756592</td>
+      <td>0.864280</td>
+      <td>11628</td>
+      <td>0.681012</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3806</th>
+      <td>11625</td>
+      <td>421.390015</td>
+      <td>167.714798</td>
+      <td>89.462570</td>
+      <td>0.845850</td>
+      <td>11904</td>
+      <td>0.694279</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3807</th>
+      <td>12437</td>
+      <td>442.498993</td>
+      <td>183.572922</td>
+      <td>86.801979</td>
+      <td>0.881144</td>
+      <td>12645</td>
+      <td>0.626739</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3808</th>
+      <td>9882</td>
+      <td>392.296997</td>
+      <td>161.193985</td>
+      <td>78.210480</td>
+      <td>0.874406</td>
+      <td>10097</td>
+      <td>0.659064</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3809</th>
+      <td>11434</td>
+      <td>404.709991</td>
+      <td>161.079269</td>
+      <td>90.868195</td>
+      <td>0.825692</td>
+      <td>11591</td>
+      <td>0.802949</td>
+      <td>Osmancik</td>
+    </tr>
+  </tbody>
+</table>
+<p>3810 rows × 8 columns</p>
+</div></div></div>
+</div>
+<p>Data di atas merupakan data yang akan kami gunakan selama pengerjaan kali ini.</p>
+</section>
+</section>
+<section id="memahami-data">
+<h2>MEMAHAMI DATA<a class="headerlink" href="#memahami-data" title="Link to this heading">#</a></h2>
+<section id="deskripsi-data">
+<h3>Deskripsi Data<a class="headerlink" href="#deskripsi-data" title="Link to this heading">#</a></h3>
+<img src="asset/dataUnderstanding/beras.jpg" width="" align="" /><p>Rice atau dalam Bahasa Indonesia Beras, merupakan bagian bulir padi (gabah) yang telah dipisah dari sekam. Sekam (Jawa mêrang) secara anatomi disebut ‘palea’ (bagian yang ditutupi) dan ‘lemma’ (bagian yang menutupi). Pada salah satu tahap pemrosesan hasil panen padi, gabah ditumbuk dengan lesung (Jawa lumpang) atau digiling sehingga bagian luarnya (kulit gabah) terlepas dari isinya. Bagian isi inilah, yang berwarna putih, kemerahan, ungu, atau bahkan hitam, yang disebut beras.</p>
+<p>Anatomi beras</p>
+<img src="asset/dataUnderstanding/anatomi beras.png" width="50%" align="" /><p>Beras sendiri secara biologi adalah bagian biji padi yang terdiri dari</p>
+<ul class="simple">
+<li><p>Aleuron, lapis terluar yang sering kali ikut terbuang dalam proses pemisahan kulit</p></li>
+</ul>
+<ul class="simple">
+<li><p>Endosperma, tempat sebagian besar pati dan protein beras berada</p></li>
+</ul>
+<ul class="simple">
+<li><p>Embrio, yang merupakan calon tanaman baru (dalam beras tidak dapat tumbuh lagi, kecuali dengan bantuan teknik kultur jaringan). Dalam bahasa sehari-hari, embrio disebut sebagai mata beras.</p></li>
+</ul>
+<p>Di antara padi bersertifikat yang ditanam di TURKI, spesies Osmancik, yang memiliki areal tanam luas sejak tahun 1997 dan spesies Cammeo yang ditanam sejak tahun 2014. Oleh karena itu, pada pengerjaan kami kali ini hanya menggunakan 2 species saja.</p>
+<img src="asset/dataUnderstanding/Gambar Data.png" width="50%" align="" /><p>Pada dataset yang kita miliki terdapat 3810 data numerik, 2180 di antaranya milik Osmancik dan 1630 milik Cammeo.</p>
+</section>
+<section id="penjelasan-fitur">
+<h3>Penjelasan Fitur<a class="headerlink" href="#penjelasan-fitur" title="Link to this heading">#</a></h3>
+<p>Sebanyak 3.810 gambar butiran beras diambil untuk kedua spesies tersebut, diproses dan dibuat kesimpulan fitur. Diperoleh 7 ciri morfologi untuk setiap butir beras.</p>
+<ul class="simple">
+<li><p>Area (Integer, px, numerik)merupakan batas butir beras, fitur ini mengembalikan jumlah piksel dalam batas butir tiap berasnya.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Perimeter(float, px, numerik) merupakan fitur yang menampung keliling butiran beras yang di dapat dengan menghitung jarak antar piksel di sekitar batas butiran beras.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Major Axis Length(float, numerik) panjang sumbu utama merupakan garis terpanjang yang dapat digambar pada butiran beras, yaitu jarak sumbu utama.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Minor Axis Length(float, numerik) panjang sumbu kecil merupakan garis terpendek yang dapat digambar pada butiran beras, yaitu jarak sumbu kecil.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Eccentricity(float, numerik) mengukur seberapa bulat elips, yang mempunyai momen yang sama dengan butiran beras.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Convex Area(float, numerik) mengembalikan jumlah piksel cangkang cembung terkecil di wilayah yang dibentuk oleh butiran beras.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Extent(float, numerik ) mengembalikan rasio wilayah yang dibentuk oleh butiran beras terhadap piksel kotak pembatas</p></li>
+</ul>
+</section>
+</section>
+<section id="plotting-data">
+<h2>PLOTTING DATA<a class="headerlink" href="#plotting-data" title="Link to this heading">#</a></h2>
+<section id="data-distribution">
+<h3>Data Distribution<a class="headerlink" href="#data-distribution" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Area Feature</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Area&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/28fbc4c4dd4b9da1b5da5d735f8ca5a6cc05450bed9ba4bddafc20f7b7f397cb.png" src="_images/28fbc4c4dd4b9da1b5da5d735f8ca5a6cc05450bed9ba4bddafc20f7b7f397cb.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Perimeter Feature</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Perimeter&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Perimeter&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bff867302707ccecf0850e44fb99b6fe78b8e638c51a2d2c87b56255c9ea2886.png" src="_images/bff867302707ccecf0850e44fb99b6fe78b8e638c51a2d2c87b56255c9ea2886.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Major_Axis_Length Feature</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Major_Axis_Length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Major Axis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/22e2fee264087ddf50fd3e82a8f8fb559061c83bb65e9c3af696d1407f724e67.png" src="_images/22e2fee264087ddf50fd3e82a8f8fb559061c83bb65e9c3af696d1407f724e67.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Minor_Axis_Length Feature</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Minor_Axis_Length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Minor Axis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2c6ca445eee0f478b3c5cfae8377b66c5461d5220ef2df56277896f79dc62b44.png" src="_images/2c6ca445eee0f478b3c5cfae8377b66c5461d5220ef2df56277896f79dc62b44.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Eccentricity Feature</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Eccentricity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Eccentrity&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/66ceef2bc17f6158edc6d4ab21b7c5bc5aef814b6f8bf3edfbe4abc6ce20a1a8.png" src="_images/66ceef2bc17f6158edc6d4ab21b7c5bc5aef814b6f8bf3edfbe4abc6ce20a1a8.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Convex Area Feature</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Convex_Area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Convex Area&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/604ce3d73e06e53747c0da38e96463e115cc3d7b83a8d992dcdd6c88d616af47.png" src="_images/604ce3d73e06e53747c0da38e96463e115cc3d7b83a8d992dcdd6c88d616af47.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Extent Feature</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Extent&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Extent&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b91f04a16652da6b67aeb1864d3f65a1b202ecf1c9d4c4d7122caf57b7874df5.png" src="_images/b91f04a16652da6b67aeb1864d3f65a1b202ecf1c9d4c4d7122caf57b7874df5.png" />
+</div>
+</div>
+</section>
+<section id="d-distribution">
+<h3>2D Distribution<a class="headerlink" href="#d-distribution" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Asumsi df af_outliersalah DataFrame Anda dengan kolom-kolom yang relevan</span>
+<span class="c1"># Mengonversi kolom yang dipilih menjadi array numpy</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Area&#39;</span><span class="p">,</span> <span class="s1">&#39;Perimeter&#39;</span><span class="p">,</span> <span class="s1">&#39;Major_Axis_Length&#39;</span><span class="p">,</span> <span class="s1">&#39;Minor_Axis_Length&#39;</span><span class="p">,</span> <span class="s1">&#39;Eccentricity&#39;</span><span class="p">,</span> <span class="s1">&#39;Convex_Area&#39;</span><span class="p">,</span> <span class="s1">&#39;Extent&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Menerapkan Local Outlier Factor</span>
+<span class="n">lof</span> <span class="o">=</span> <span class="n">LocalOutlierFactor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">lof</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Menambahkan prediksi outlier ke DataFrame</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Outlier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_pred</span>
+
+<span class="c1"># Menampilkan plot pasangan (pair plot)</span>
+<span class="n">pair_plot</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Outlier&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">},</span> <span class="n">diag_kind</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+
+<span class="c1"># Menambahkan judul</span>
+<span class="n">pair_plot</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Visualisasi Outlier Menggunakan Local Outlier Factor (LOF)&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/30bfe95d214704fb60d53cfe62cd2f53590a16d7265ddef54dd099a9f65261d6.png" src="_images/30bfe95d214704fb60d53cfe62cd2f53590a16d7265ddef54dd099a9f65261d6.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="eksplorasi-data">
+<h2>EKSPLORASI DATA<a class="headerlink" href="#eksplorasi-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Area&#39;</span><span class="p">,</span> <span class="s1">&#39;Perimeter&#39;</span><span class="p">,</span> <span class="s1">&#39;Major_Axis_Length&#39;</span><span class="p">,</span> <span class="s1">&#39;Minor_Axis_Length&#39;</span><span class="p">,</span> <span class="s1">&#39;Eccentricity&#39;</span><span class="p">,</span> <span class="s1">&#39;Convex_Area&#39;</span><span class="p">,</span> <span class="s1">&#39;Extent&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Area</th>
+      <th>Perimeter</th>
+      <th>Major_Axis_Length</th>
+      <th>Minor_Axis_Length</th>
+      <th>Eccentricity</th>
+      <th>Convex_Area</th>
+      <th>Extent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>3810.000000</td>
+      <td>3810.000000</td>
+      <td>3810.000000</td>
+      <td>3810.000000</td>
+      <td>3810.000000</td>
+      <td>3810.000000</td>
+      <td>3810.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>12667.727559</td>
+      <td>454.239180</td>
+      <td>188.776222</td>
+      <td>86.313750</td>
+      <td>0.886871</td>
+      <td>12952.496850</td>
+      <td>0.661934</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1732.367706</td>
+      <td>35.597081</td>
+      <td>17.448679</td>
+      <td>5.729817</td>
+      <td>0.020818</td>
+      <td>1776.972042</td>
+      <td>0.077239</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>7551.000000</td>
+      <td>359.100006</td>
+      <td>145.264465</td>
+      <td>59.532406</td>
+      <td>0.777233</td>
+      <td>7723.000000</td>
+      <td>0.497413</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>11370.500000</td>
+      <td>426.144753</td>
+      <td>174.353855</td>
+      <td>82.731695</td>
+      <td>0.872402</td>
+      <td>11626.250000</td>
+      <td>0.598862</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>12421.500000</td>
+      <td>448.852493</td>
+      <td>185.810059</td>
+      <td>86.434647</td>
+      <td>0.889050</td>
+      <td>12706.500000</td>
+      <td>0.645361</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>13950.000000</td>
+      <td>483.683746</td>
+      <td>203.550438</td>
+      <td>90.143677</td>
+      <td>0.902588</td>
+      <td>14284.000000</td>
+      <td>0.726562</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>18913.000000</td>
+      <td>548.445984</td>
+      <td>239.010498</td>
+      <td>107.542450</td>
+      <td>0.948007</td>
+      <td>19099.000000</td>
+      <td>0.861050</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="kualitas-data">
+<h2>KUALITAS DATA<a class="headerlink" href="#kualitas-data" title="Link to this heading">#</a></h2>
+<section id="missing-value">
+<h3>Missing Value<a class="headerlink" href="#missing-value" title="Link to this heading">#</a></h3>
+<p>Missing value adalah informasi yang tidak tersedia untuk sebuah objek (kasus). Missing value terjadi karena informasi untuk sesuatu tentang objek tidak diberikan, sulit dicari, atau memang informasi tersebut tidak ada</p>
+<p>Kita akan mengecek untuk kualitas data, apakah data tersebut memiliki missing value atau tidak.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Area                 0
+Perimeter            0
+Major_Axis_Length    0
+Minor_Axis_Length    0
+Eccentricity         0
+Convex_Area          0
+Extent               0
+Class                0
+Outlier              0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pada data set yang kita gunakan kali ini, data tidak terdapat missing value.</p>
+</section>
+<section id="outlier-data">
+<h3>Outlier Data<a class="headerlink" href="#outlier-data" title="Link to this heading">#</a></h3>
+<p>Outlier adalah nilai yang jauh berbeda dari nilai lainnya dalam kumpulan data. Nilai ini muncul sebagai pengecualian dalam pola data yang ada.</p>
+<p>Nilai yang ada di outlier bisa jauh lebih tinggi maupun lebih rendah dibandingkan dengan nilai-nilai lain dalam dataset. Outlier bisa terjadi karena berbagai alasan, termasuk kesalahan pengukuran, kejadian langka, atau karena faktor lain yang tidak terduga.</p>
+<p>Mendeteksi outlier merupakan langkah penting dalam analisis data karena outlier memiliki dampak signifikan terhadap hasil analisis dan berpotensi menghasilkan kesimpulan yang tidak akurat.</p>
+<p>Berikut beberapa alasan lain di balik pentingnya mendeteksi outlier:</p>
+<ol class="arabic simple">
+<li><p>Menghindari distorsi analisis</p></li>
+</ol>
+<ol class="arabic simple" start="2">
+<li><p>Memahami data dengan tepat</p></li>
+</ol>
+<ol class="arabic simple" start="3">
+<li><p>Memastikan analisis valid</p></li>
+</ol>
+<ol class="arabic simple" start="4">
+<li><p>Mendeteksi jika ada kesalahan atau kecurangan</p></li>
+</ol>
+<p>Oleh karena itu, nantinya akan kita cek apakah ada data yang aneh atau tidak dengan menggunakan LOF (Local Outlier Factor)</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-preprocessing">
+<h1>DATA PREPROCESSING<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h1>
+<section id="local-outlier-factor">
+<h2>Local Outlier Factor<a class="headerlink" href="#local-outlier-factor" title="Link to this heading">#</a></h2>
+<p>Konsep Local Outlier Factor</p>
+<p>Local Outlier Factor (LOF) adalah metode yang digunakan dalam analisis data untuk mengidentifikasi observasi yang dianggap sebagai outlier berdasarkan konteks lokal atau lingkungan mereka.
+LOF memberikan skor untuk setiap data berdasarkan seberapa “aneh” atau tidak biasa data tersebut dibandingkan dengan tetangga-tetangganya.</p>
+<p>Berikut adalah konsep utama dari LOF:</p>
+<ul class="simple">
+<li><p>Local Reachability Density (LRD):
+Local Reachability Density (LRD) adalah ukuran kepadatan lokal dari sebuah data. Ini menunjukkan seberapa dekat sebuah data dengan tetangganya dalam ruang fitur. LRD didefinisikan sebagai kebalikan dari jarak rata-rata antara sebuah data dan tetangganya dalam k-NN. Semakin kecil jarak rata-rata, semakin besar LRD.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Local Outlier Factor (LOF):
+Local Outlier Factor (LOF) adalah rasio dari LRD sebuah data terhadap LRD dari tetangga-tetangganya. Ini mengukur seberapa jauh sebuah data dari tetangganya dalam hal kepadatan. Data dengan LOF yang tinggi cenderung menjadi outlier karena mereka memiliki kepadatan yang jauh lebih rendah dibandingkan dengan tetangga-tetangganya.</p></li>
+</ul>
+<p>Proses utama dalam menghitung LOF melibatkan langkah-langkah berikut:</p>
+<ul class="simple">
+<li><p>Hitung jarak antara semua pasang data dalam ruang fitur dengan Euclidean Distance.</p></li>
+</ul>
+<img src="image-20240530-065904.png" width="actual" align="left" /><ul class="simple">
+<li></li>
+</ul>
+<p>Temukan k tetangga terdekat untuk setiap data.</p>
+<ul class="simple">
+<li><p>Menghitung Reachability Distance (RD)</p></li>
+</ul>
+<img src="image-20240530-070120.png" width="50%" align="left" /><ul class="simple">
+<li></li>
+</ul>
+<p>Hitung LRD untuk setiap data dengan menghitung kebalikan dari jarak rata-rata antara data dan tetangganya.</p>
+<img src="image-20240530-070226.png" width="50%" align="left" /><ul class="simple">
+<li></li>
+</ul>
+<p>Hitung LOF untuk setiap data dengan membandingkan LRD dari data dengan LRD dari tetangga-tetangganya.</p>
+<img src="image-20240530-070247.png" width="50%" align="left" /></section>
+<section id="check-outliers">
+<h2>Check Outliers<a class="headerlink" href="#check-outliers" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lof</span> <span class="o">=</span> <span class="n">LocalOutlierFactor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">lof_predict</span> <span class="o">=</span> <span class="n">lof</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Class&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">outlier</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">lof_predict</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Index predicted table:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">lof_predict</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index predicted table: Index([   4,   41,   56,   74,   85,  152,  157,  181,  198,  223,  225,  277,
+        331,  340,  376,  399,  413,  423,  425,  518,  573,  600,  648,  656,
+        772,  795,  856,  869,  881,  900,  928,  957, 1027, 1073, 1146, 1164,
+       1166, 1178, 1203, 1217, 1271, 1296, 1312, 1325, 1354, 1369, 1428, 1460,
+       1541, 1573, 1622, 1625, 1634, 1668, 1730, 1741, 1750, 1810, 2009, 2032,
+       2055, 2097, 2102, 2282, 2290, 2334, 2349, 2358, 2436, 2563, 2567, 2718,
+       2745, 2770, 3025, 3077, 3169, 3263, 3279, 3294, 3333, 3353, 3373, 3376,
+       3398, 3416, 3491, 3569, 3572, 3587, 3631, 3643, 3654, 3696, 3711],
+      dtype=&#39;int64&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">outlier</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Outlier&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Area</th>
+      <th>Perimeter</th>
+      <th>Major_Axis_Length</th>
+      <th>Minor_Axis_Length</th>
+      <th>Eccentricity</th>
+      <th>Convex_Area</th>
+      <th>Extent</th>
+      <th>Class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>14688</td>
+      <td>507.166992</td>
+      <td>211.743378</td>
+      <td>89.312454</td>
+      <td>0.906691</td>
+      <td>15262</td>
+      <td>0.646024</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>13047</td>
+      <td>486.368988</td>
+      <td>213.194473</td>
+      <td>79.288872</td>
+      <td>0.928269</td>
+      <td>13621</td>
+      <td>0.615425</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>12950</td>
+      <td>468.570007</td>
+      <td>196.616791</td>
+      <td>84.800316</td>
+      <td>0.902210</td>
+      <td>13584</td>
+      <td>0.761810</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>15319</td>
+      <td>506.024994</td>
+      <td>208.227753</td>
+      <td>94.838745</td>
+      <td>0.890258</td>
+      <td>15813</td>
+      <td>0.573702</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>13302</td>
+      <td>482.690002</td>
+      <td>209.397110</td>
+      <td>81.748909</td>
+      <td>0.920645</td>
+      <td>13827</td>
+      <td>0.595328</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3631</th>
+      <td>9679</td>
+      <td>390.221985</td>
+      <td>154.200592</td>
+      <td>81.986458</td>
+      <td>0.846941</td>
+      <td>10003</td>
+      <td>0.620687</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3643</th>
+      <td>13576</td>
+      <td>477.825012</td>
+      <td>190.026352</td>
+      <td>91.821098</td>
+      <td>0.875509</td>
+      <td>14137</td>
+      <td>0.683275</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3654</th>
+      <td>9330</td>
+      <td>391.165985</td>
+      <td>161.425415</td>
+      <td>74.863876</td>
+      <td>0.885957</td>
+      <td>9624</td>
+      <td>0.576353</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3696</th>
+      <td>9772</td>
+      <td>394.983002</td>
+      <td>155.292648</td>
+      <td>82.316940</td>
+      <td>0.847950</td>
+      <td>10154</td>
+      <td>0.691285</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3711</th>
+      <td>12172</td>
+      <td>434.027008</td>
+      <td>180.723694</td>
+      <td>86.314468</td>
+      <td>0.878575</td>
+      <td>12311</td>
+      <td>0.795140</td>
+      <td>Osmancik</td>
+    </tr>
+  </tbody>
+</table>
+<p>95 rows × 8 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Outlier&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Area</th>
+      <th>Perimeter</th>
+      <th>Major_Axis_Length</th>
+      <th>Minor_Axis_Length</th>
+      <th>Eccentricity</th>
+      <th>Convex_Area</th>
+      <th>Extent</th>
+      <th>Class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>15231</td>
+      <td>525.578979</td>
+      <td>229.749878</td>
+      <td>85.093788</td>
+      <td>0.928882</td>
+      <td>15617</td>
+      <td>0.572896</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>14656</td>
+      <td>494.311005</td>
+      <td>206.020065</td>
+      <td>91.730972</td>
+      <td>0.895405</td>
+      <td>15072</td>
+      <td>0.615436</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>14634</td>
+      <td>501.122009</td>
+      <td>214.106781</td>
+      <td>87.768288</td>
+      <td>0.912118</td>
+      <td>14954</td>
+      <td>0.693259</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>13176</td>
+      <td>458.342987</td>
+      <td>193.337387</td>
+      <td>87.448395</td>
+      <td>0.891861</td>
+      <td>13368</td>
+      <td>0.640669</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>14688</td>
+      <td>507.166992</td>
+      <td>211.743378</td>
+      <td>89.312454</td>
+      <td>0.906691</td>
+      <td>15262</td>
+      <td>0.646024</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3805</th>
+      <td>11441</td>
+      <td>415.858002</td>
+      <td>170.486771</td>
+      <td>85.756592</td>
+      <td>0.864280</td>
+      <td>11628</td>
+      <td>0.681012</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3806</th>
+      <td>11625</td>
+      <td>421.390015</td>
+      <td>167.714798</td>
+      <td>89.462570</td>
+      <td>0.845850</td>
+      <td>11904</td>
+      <td>0.694279</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3807</th>
+      <td>12437</td>
+      <td>442.498993</td>
+      <td>183.572922</td>
+      <td>86.801979</td>
+      <td>0.881144</td>
+      <td>12645</td>
+      <td>0.626739</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3808</th>
+      <td>9882</td>
+      <td>392.296997</td>
+      <td>161.193985</td>
+      <td>78.210480</td>
+      <td>0.874406</td>
+      <td>10097</td>
+      <td>0.659064</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3809</th>
+      <td>11434</td>
+      <td>404.709991</td>
+      <td>161.079269</td>
+      <td>90.868195</td>
+      <td>0.825692</td>
+      <td>11591</td>
+      <td>0.802949</td>
+      <td>Osmancik</td>
+    </tr>
+  </tbody>
+</table>
+<p>3810 rows × 8 columns</p>
+</div></div></div>
+</div>
+<p>mengganti outlier dengan mean</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Class&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">column_mean</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;int64&#39;</span><span class="p">:</span>
+        <span class="n">column_mean</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">column_mean</span><span class="p">)</span>
+    
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">outlier</span><span class="p">,</span> <span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">column_mean</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Area</th>
+      <th>Perimeter</th>
+      <th>Major_Axis_Length</th>
+      <th>Minor_Axis_Length</th>
+      <th>Eccentricity</th>
+      <th>Convex_Area</th>
+      <th>Extent</th>
+      <th>Class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>15231</td>
+      <td>525.578979</td>
+      <td>229.749878</td>
+      <td>85.093788</td>
+      <td>0.928882</td>
+      <td>15617</td>
+      <td>0.572896</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>14656</td>
+      <td>494.311005</td>
+      <td>206.020065</td>
+      <td>91.730972</td>
+      <td>0.895405</td>
+      <td>15072</td>
+      <td>0.615436</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>14634</td>
+      <td>501.122009</td>
+      <td>214.106781</td>
+      <td>87.768288</td>
+      <td>0.912118</td>
+      <td>14954</td>
+      <td>0.693259</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>13176</td>
+      <td>458.342987</td>
+      <td>193.337387</td>
+      <td>87.448395</td>
+      <td>0.891861</td>
+      <td>13368</td>
+      <td>0.640669</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>12667</td>
+      <td>454.239180</td>
+      <td>188.776222</td>
+      <td>86.313750</td>
+      <td>0.886871</td>
+      <td>12952</td>
+      <td>0.661934</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3805</th>
+      <td>11441</td>
+      <td>415.858002</td>
+      <td>170.486771</td>
+      <td>85.756592</td>
+      <td>0.864280</td>
+      <td>11628</td>
+      <td>0.681012</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3806</th>
+      <td>11625</td>
+      <td>421.390015</td>
+      <td>167.714798</td>
+      <td>89.462570</td>
+      <td>0.845850</td>
+      <td>11904</td>
+      <td>0.694279</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3807</th>
+      <td>12437</td>
+      <td>442.498993</td>
+      <td>183.572922</td>
+      <td>86.801979</td>
+      <td>0.881144</td>
+      <td>12645</td>
+      <td>0.626739</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3808</th>
+      <td>9882</td>
+      <td>392.296997</td>
+      <td>161.193985</td>
+      <td>78.210480</td>
+      <td>0.874406</td>
+      <td>10097</td>
+      <td>0.659064</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3809</th>
+      <td>11434</td>
+      <td>404.709991</td>
+      <td>161.079269</td>
+      <td>90.868195</td>
+      <td>0.825692</td>
+      <td>11591</td>
+      <td>0.802949</td>
+      <td>Osmancik</td>
+    </tr>
+  </tbody>
+</table>
+<p>3810 rows × 8 columns</p>
+</div></div></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-modeling">
+<h1>DATA MODELING<a class="headerlink" href="#data-modeling" title="Link to this heading">#</a></h1>
+<p>Membagi data (feature dan class)</p>
+<p>Pada klasifikasi naive bayes gaussian kita memerlukan data train dan data test. Data train merupakan bagian dalam kumpulan dataset yang disediakan untuk menjadi bahan pembelajaran model agar model dapat menggeneralisasi (menemukan pola) data sehingga nantinya dapat digunakan untuk memprediksi data baru. Sedangkan data test adalah bagian dari kumpulan data set yang akan digunakan untuk mengetest dengan acuan prediksi dari data train yang digunakan. Untuk pembagian data nya sendiri adalah 20% menjadi data Test dan 80% menjadi data Train. Pada kode berikut random state dimulai dari 20.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Class&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Class&#39;</span><span class="p">]</span>
+
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Menampilkan x_train data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_train</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Area</th>
+      <th>Perimeter</th>
+      <th>Major_Axis_Length</th>
+      <th>Minor_Axis_Length</th>
+      <th>Eccentricity</th>
+      <th>Convex_Area</th>
+      <th>Extent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3644</th>
+      <td>12529</td>
+      <td>437.838989</td>
+      <td>174.861450</td>
+      <td>92.189262</td>
+      <td>0.849733</td>
+      <td>12840</td>
+      <td>0.766019</td>
+    </tr>
+    <tr>
+      <th>3418</th>
+      <td>11051</td>
+      <td>424.976013</td>
+      <td>180.871902</td>
+      <td>78.267380</td>
+      <td>0.901527</td>
+      <td>11240</td>
+      <td>0.568058</td>
+    </tr>
+    <tr>
+      <th>1351</th>
+      <td>12975</td>
+      <td>463.851013</td>
+      <td>196.423965</td>
+      <td>85.064117</td>
+      <td>0.901363</td>
+      <td>13358</td>
+      <td>0.609126</td>
+    </tr>
+    <tr>
+      <th>3591</th>
+      <td>10398</td>
+      <td>405.678986</td>
+      <td>162.227158</td>
+      <td>82.393456</td>
+      <td>0.861422</td>
+      <td>10658</td>
+      <td>0.644717</td>
+    </tr>
+    <tr>
+      <th>246</th>
+      <td>14541</td>
+      <td>492.785004</td>
+      <td>204.257141</td>
+      <td>92.471016</td>
+      <td>0.891653</td>
+      <td>14893</td>
+      <td>0.758292</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1130</th>
+      <td>16625</td>
+      <td>535.989014</td>
+      <td>229.793594</td>
+      <td>93.089622</td>
+      <td>0.914272</td>
+      <td>16951</td>
+      <td>0.654141</td>
+    </tr>
+    <tr>
+      <th>1294</th>
+      <td>13901</td>
+      <td>478.848999</td>
+      <td>200.441910</td>
+      <td>89.341988</td>
+      <td>0.895170</td>
+      <td>14232</td>
+      <td>0.568548</td>
+    </tr>
+    <tr>
+      <th>860</th>
+      <td>16291</td>
+      <td>523.192993</td>
+      <td>223.252335</td>
+      <td>93.604156</td>
+      <td>0.907859</td>
+      <td>16595</td>
+      <td>0.581157</td>
+    </tr>
+    <tr>
+      <th>3507</th>
+      <td>10847</td>
+      <td>417.924011</td>
+      <td>170.366791</td>
+      <td>82.473007</td>
+      <td>0.875018</td>
+      <td>11107</td>
+      <td>0.746319</td>
+    </tr>
+    <tr>
+      <th>3174</th>
+      <td>13154</td>
+      <td>451.562012</td>
+      <td>179.953598</td>
+      <td>94.313812</td>
+      <td>0.851656</td>
+      <td>13428</td>
+      <td>0.650222</td>
+    </tr>
+  </tbody>
+</table>
+<p>3048 rows × 7 columns</p>
+</div></div></div>
+</div>
+<p>Menampilkan x_test data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_test</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Area</th>
+      <th>Perimeter</th>
+      <th>Major_Axis_Length</th>
+      <th>Minor_Axis_Length</th>
+      <th>Eccentricity</th>
+      <th>Convex_Area</th>
+      <th>Extent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1011</th>
+      <td>12442</td>
+      <td>459.535004</td>
+      <td>187.508850</td>
+      <td>87.187302</td>
+      <td>0.885323</td>
+      <td>12941</td>
+      <td>0.587580</td>
+    </tr>
+    <tr>
+      <th>3185</th>
+      <td>12408</td>
+      <td>437.014008</td>
+      <td>179.741165</td>
+      <td>88.829605</td>
+      <td>0.869343</td>
+      <td>12598</td>
+      <td>0.636928</td>
+    </tr>
+    <tr>
+      <th>3698</th>
+      <td>12867</td>
+      <td>449.079987</td>
+      <td>181.700562</td>
+      <td>91.341064</td>
+      <td>0.864460</td>
+      <td>13152</td>
+      <td>0.649062</td>
+    </tr>
+    <tr>
+      <th>897</th>
+      <td>13090</td>
+      <td>472.945007</td>
+      <td>202.601578</td>
+      <td>83.230179</td>
+      <td>0.911722</td>
+      <td>13331</td>
+      <td>0.775290</td>
+    </tr>
+    <tr>
+      <th>3245</th>
+      <td>10359</td>
+      <td>409.510986</td>
+      <td>173.337967</td>
+      <td>76.875809</td>
+      <td>0.896273</td>
+      <td>10510</td>
+      <td>0.573588</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1366</th>
+      <td>14802</td>
+      <td>497.832001</td>
+      <td>209.617950</td>
+      <td>91.147133</td>
+      <td>0.900515</td>
+      <td>15208</td>
+      <td>0.622980</td>
+    </tr>
+    <tr>
+      <th>644</th>
+      <td>17192</td>
+      <td>528.341980</td>
+      <td>222.949936</td>
+      <td>99.092674</td>
+      <td>0.895798</td>
+      <td>17457</td>
+      <td>0.628914</td>
+    </tr>
+    <tr>
+      <th>2634</th>
+      <td>11234</td>
+      <td>425.931000</td>
+      <td>176.301987</td>
+      <td>82.101532</td>
+      <td>0.884950</td>
+      <td>11452</td>
+      <td>0.655579</td>
+    </tr>
+    <tr>
+      <th>1171</th>
+      <td>13982</td>
+      <td>479.785004</td>
+      <td>204.542389</td>
+      <td>88.279648</td>
+      <td>0.902067</td>
+      <td>14221</td>
+      <td>0.772913</td>
+    </tr>
+    <tr>
+      <th>1569</th>
+      <td>14321</td>
+      <td>490.424988</td>
+      <td>204.280380</td>
+      <td>90.682976</td>
+      <td>0.896069</td>
+      <td>14622</td>
+      <td>0.573873</td>
+    </tr>
+  </tbody>
+</table>
+<p>762 rows × 7 columns</p>
+</div></div></div>
+</div>
+<p>Menampilkan y_train data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3644    Osmancik
+3418    Osmancik
+1351      Cammeo
+3591    Osmancik
+246       Cammeo
+          ...   
+1130      Cammeo
+1294      Cammeo
+860       Cammeo
+3507    Osmancik
+3174    Osmancik
+Name: Class, Length: 3048, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Menampilkan y_test data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_test</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1011      Cammeo
+3185    Osmancik
+3698    Osmancik
+897       Cammeo
+3245    Osmancik
+          ...   
+1366      Cammeo
+644       Cammeo
+2634    Osmancik
+1171      Cammeo
+1569      Cammeo
+Name: Class, Length: 762, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Menggabungkan data x dan y</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+
+<span class="n">df_test</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Area</th>
+      <th>Perimeter</th>
+      <th>Major_Axis_Length</th>
+      <th>Minor_Axis_Length</th>
+      <th>Eccentricity</th>
+      <th>Convex_Area</th>
+      <th>Extent</th>
+      <th>Class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1011</th>
+      <td>12442</td>
+      <td>459.535004</td>
+      <td>187.508850</td>
+      <td>87.187302</td>
+      <td>0.885323</td>
+      <td>12941</td>
+      <td>0.587580</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3185</th>
+      <td>12408</td>
+      <td>437.014008</td>
+      <td>179.741165</td>
+      <td>88.829605</td>
+      <td>0.869343</td>
+      <td>12598</td>
+      <td>0.636928</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3698</th>
+      <td>12867</td>
+      <td>449.079987</td>
+      <td>181.700562</td>
+      <td>91.341064</td>
+      <td>0.864460</td>
+      <td>13152</td>
+      <td>0.649062</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>897</th>
+      <td>13090</td>
+      <td>472.945007</td>
+      <td>202.601578</td>
+      <td>83.230179</td>
+      <td>0.911722</td>
+      <td>13331</td>
+      <td>0.775290</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3245</th>
+      <td>10359</td>
+      <td>409.510986</td>
+      <td>173.337967</td>
+      <td>76.875809</td>
+      <td>0.896273</td>
+      <td>10510</td>
+      <td>0.573588</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1366</th>
+      <td>14802</td>
+      <td>497.832001</td>
+      <td>209.617950</td>
+      <td>91.147133</td>
+      <td>0.900515</td>
+      <td>15208</td>
+      <td>0.622980</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>644</th>
+      <td>17192</td>
+      <td>528.341980</td>
+      <td>222.949936</td>
+      <td>99.092674</td>
+      <td>0.895798</td>
+      <td>17457</td>
+      <td>0.628914</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>2634</th>
+      <td>11234</td>
+      <td>425.931000</td>
+      <td>176.301987</td>
+      <td>82.101532</td>
+      <td>0.884950</td>
+      <td>11452</td>
+      <td>0.655579</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>1171</th>
+      <td>13982</td>
+      <td>479.785004</td>
+      <td>204.542389</td>
+      <td>88.279648</td>
+      <td>0.902067</td>
+      <td>14221</td>
+      <td>0.772913</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>1569</th>
+      <td>14321</td>
+      <td>490.424988</td>
+      <td>204.280380</td>
+      <td>90.682976</td>
+      <td>0.896069</td>
+      <td>14622</td>
+      <td>0.573873</td>
+      <td>Cammeo</td>
+    </tr>
+  </tbody>
+</table>
+<p>762 rows × 8 columns</p>
+</div></div></div>
+</div>
+<section id="gaussian-naive-bayes-classification">
+<h2>GAUSSIAN NAIVE BAYES CLASSIFICATION<a class="headerlink" href="#gaussian-naive-bayes-classification" title="Link to this heading">#</a></h2>
+<p>Gaussian Naive Bayes merupakan teknik klasisifkasi yang digunakan dalam machine learning dengan menggunakan metode probability dan distribusi gaussian atau distribusi normal. Pada distribusi gaussian tiap fitur data memiliki pengaruh yang independent dalam meprediksi target. Prediksi akhir didapat dari kombinasi predikasi seluruh parameter dengan probability dari target yang diklasifikasikan kedalam dua kelas. Klasifikasi akhirnya adalah hasil probability yang lebih tinggi dari group target.</p>
+<p>Tujuan metode ini adalah mengklasifikasikan probabilitas berdasarkan pembelajaran mesin atas probabilitas lain.</p>
+<img src="asset/gaussian/rumusGaussian.png" width="" align="" /><p>Di mana,
+P(A|B) = peluang terjadinya kejadian A jika kejadian B telah terjadi. Perhatikan bahwa “|” mengacu pada “diberikan.”
+P(A) = peluang terjadinya kejadian A.
+P(B) = peluang terjadinya kejadian B.
+P(B|A) = peluang terjadinya kejadian B, jika diketahui kejadian A telah terjadi.</p>
+<p>Untuk menghitung likehoodnya sendiri kita bisa memakai rumus distribusi normal</p>
+<img src="asset/gaussian/rumusLikelihood.png" width="" align="" /><p>Dengan:
+f(x) = fungsi kontinu atau fungsi kepadatan peluang;
+σ = simpangan baku (standar deviasi);
+μ = nilai rata-rata;
+π = 3,14; dan
+e = Eksponen</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">classifier</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+
+<span class="n">classifier</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9015748031496063
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="knn">
+<h2>KNN<a class="headerlink" href="#knn" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">classifier</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+
+<span class="n">classifier</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8753280839895013
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ensemble-learning">
+<h1>ENSEMBLE LEARNING<a class="headerlink" href="#ensemble-learning" title="Link to this heading">#</a></h1>
+<section id="stacking-classifier">
+<h2>Stacking Classifier<a class="headerlink" href="#stacking-classifier" title="Link to this heading">#</a></h2>
+<img src="image-20240612-162138.png" width="50%" align="" /><section id="make-knn-model-with-n-3">
+<h3>Make KNN model with n = 3<a class="headerlink" href="#make-knn-model-with-n-3" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf_n_3</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">clf_n_3</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">clf_n_3</span><span class="p">,</span> <span class="s1">&#39;stacking/knn_3.joblib&#39;</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">clf_n_3</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+
+<span class="n">result_n_3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P1&#39;</span><span class="p">])</span>
+
+<span class="n">result_n_3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>P1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3043</th>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3044</th>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3045</th>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3046</th>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3047</th>
+      <td>Osmancik</td>
+    </tr>
+  </tbody>
+</table>
+<p>3048 rows × 1 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="make-knn-model-with-n-5">
+<h3>Make KNN model with n = 5<a class="headerlink" href="#make-knn-model-with-n-5" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf_n_5</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">clf_n_5</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">clf_n_5</span><span class="p">,</span> <span class="s1">&#39;stacking/knn_5.joblib&#39;</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">clf_n_5</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+
+<span class="n">result_n_5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P2&#39;</span><span class="p">])</span>
+
+<span class="n">result_n_5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>P2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3043</th>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3044</th>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3045</th>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3046</th>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3047</th>
+      <td>Cammeo</td>
+    </tr>
+  </tbody>
+</table>
+<p>3048 rows × 1 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_combined</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">result_n_3</span><span class="p">,</span> <span class="n">result_n_5</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">x_combined</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>P1</th>
+      <th>P2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Osmancik</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Osmancik</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Cammeo</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Osmancik</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Cammeo</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3043</th>
+      <td>Cammeo</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3044</th>
+      <td>Cammeo</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3045</th>
+      <td>Cammeo</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3046</th>
+      <td>Osmancik</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3047</th>
+      <td>Osmancik</td>
+      <td>Cammeo</td>
+    </tr>
+  </tbody>
+</table>
+<p>3048 rows × 2 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="change-categorical-to-numeric">
+<h3>Change categorical to numeric<a class="headerlink" href="#change-categorical-to-numeric" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">x_combined</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">,</span><span class="s2">&quot;P2&quot;</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">,</span><span class="s2">&quot;P2&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+
+<span class="n">X</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>P1_Cammeo</th>
+      <th>P1_Osmancik</th>
+      <th>P2_Cammeo</th>
+      <th>P2_Osmancik</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3043</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3044</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3045</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3046</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3047</th>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>3048 rows × 4 columns</p>
+</div></div></div>
+</div>
+<p>Make stacking classifier with gaussian naives bayes as meta classifiers for increase accuration of prediction with two estimators (KNN K = 5 and KNN K = 3).</p>
+</section>
+<section id="modelling-gaussian-naives-bayes-as-meta-classifiers">
+<h3>Modelling Gaussian Naives Bayes as Meta Classifiers<a class="headerlink" href="#modelling-gaussian-naives-bayes-as-meta-classifiers" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf_nb</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+
+<span class="n">clf_nb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">clf_nb</span><span class="p">,</span> <span class="s1">&#39;stacking/meta_clf.joblib&#39;</span><span class="p">)</span>
+
+<span class="n">clf_nb</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9186351706036745
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="make-prediction-function">
+<h3>Make prediction function<a class="headerlink" href="#make-prediction-function" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">stackingClassifier</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+  <span class="n">result_n_3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">clf_n_3</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P1&#39;</span><span class="p">])</span>
+  <span class="n">result_n_5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">clf_n_5</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P2&#39;</span><span class="p">])</span>
+  <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">result_n_3</span><span class="p">,</span> <span class="n">result_n_5</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">x_predict</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">,</span><span class="s2">&quot;P2&quot;</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">,</span><span class="s2">&quot;P2&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="s1">&#39;P1_Cammeo&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x_predict</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">&#39;P2_Cammeo&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x_predict</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">x_predict</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;P1_Cammeo&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">x_predict</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;P2_Cammeo&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="s1">&#39;P1_Osmancik&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x_predict</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">&#39;P2_Osmancik&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x_predict</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">x_predict</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;P1_Osmancik&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">x_predict</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;P2_Osmancik&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">clf_nb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_predict</span><span class="p">),</span> <span class="n">clf_nb</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="prediction-test">
+<h3>Prediction test<a class="headerlink" href="#prediction-test" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Class&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">prediction</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="n">stackingClassifier</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;prediction : </span><span class="si">{</span><span class="n">prediction</span><span class="si">}</span><span class="s1">, accuration : </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>prediction : [&#39;Osmancik&#39;], accuration : 0.9186351706036745
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="bagging-classifier">
+<h2>Bagging Classifier<a class="headerlink" href="#bagging-classifier" title="Link to this heading">#</a></h2>
+<img src="image-20240612-164937.png" width="50%" align="" /><section id="make-bootstrap-sample-data">
+<h3>Make bootstrap sample data<a class="headerlink" href="#make-bootstrap-sample-data" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B1</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">B1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Area</th>
+      <th>Perimeter</th>
+      <th>Major_Axis_Length</th>
+      <th>Minor_Axis_Length</th>
+      <th>Eccentricity</th>
+      <th>Convex_Area</th>
+      <th>Extent</th>
+      <th>Class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3187</th>
+      <td>11241</td>
+      <td>417.158997</td>
+      <td>169.247787</td>
+      <td>85.458786</td>
+      <td>0.863159</td>
+      <td>11390</td>
+      <td>0.628691</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3087</th>
+      <td>12547</td>
+      <td>434.937012</td>
+      <td>174.379410</td>
+      <td>92.454018</td>
+      <td>0.847880</td>
+      <td>12856</td>
+      <td>0.779317</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>1573</th>
+      <td>12667</td>
+      <td>454.239180</td>
+      <td>188.776222</td>
+      <td>86.313750</td>
+      <td>0.886871</td>
+      <td>12952</td>
+      <td>0.661934</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>1008</th>
+      <td>15568</td>
+      <td>519.455994</td>
+      <td>222.228088</td>
+      <td>90.817528</td>
+      <td>0.912683</td>
+      <td>15984</td>
+      <td>0.782705</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>1782</th>
+      <td>10733</td>
+      <td>402.419006</td>
+      <td>166.234314</td>
+      <td>82.705482</td>
+      <td>0.867450</td>
+      <td>10876</td>
+      <td>0.706118</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>456</th>
+      <td>14071</td>
+      <td>479.092987</td>
+      <td>197.404968</td>
+      <td>92.300987</td>
+      <td>0.883955</td>
+      <td>14398</td>
+      <td>0.598995</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>546</th>
+      <td>14675</td>
+      <td>493.273010</td>
+      <td>206.793716</td>
+      <td>91.589066</td>
+      <td>0.896571</td>
+      <td>15039</td>
+      <td>0.566165</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>1937</th>
+      <td>11939</td>
+      <td>437.733002</td>
+      <td>178.898880</td>
+      <td>86.442421</td>
+      <td>0.875515</td>
+      <td>12204</td>
+      <td>0.638996</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>959</th>
+      <td>14516</td>
+      <td>492.786011</td>
+      <td>209.760132</td>
+      <td>89.513199</td>
+      <td>0.904374</td>
+      <td>14836</td>
+      <td>0.733576</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>2009</th>
+      <td>12667</td>
+      <td>454.239180</td>
+      <td>188.776222</td>
+      <td>86.313750</td>
+      <td>0.886871</td>
+      <td>12952</td>
+      <td>0.661934</td>
+      <td>Osmancik</td>
+    </tr>
+  </tbody>
+</table>
+<p>3048 rows × 8 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B2</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">B2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Area</th>
+      <th>Perimeter</th>
+      <th>Major_Axis_Length</th>
+      <th>Minor_Axis_Length</th>
+      <th>Eccentricity</th>
+      <th>Convex_Area</th>
+      <th>Extent</th>
+      <th>Class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>801</th>
+      <td>14833</td>
+      <td>496.936005</td>
+      <td>209.312317</td>
+      <td>91.475899</td>
+      <td>0.899447</td>
+      <td>15072</td>
+      <td>0.556753</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3045</th>
+      <td>10083</td>
+      <td>402.932007</td>
+      <td>169.026810</td>
+      <td>76.982300</td>
+      <td>0.890264</td>
+      <td>10283</td>
+      <td>0.644611</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>353</th>
+      <td>14456</td>
+      <td>497.988007</td>
+      <td>210.531891</td>
+      <td>88.884293</td>
+      <td>0.906508</td>
+      <td>14865</td>
+      <td>0.678049</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>1443</th>
+      <td>16403</td>
+      <td>521.908997</td>
+      <td>215.150909</td>
+      <td>98.400948</td>
+      <td>0.889283</td>
+      <td>16867</td>
+      <td>0.588765</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>570</th>
+      <td>13410</td>
+      <td>477.084991</td>
+      <td>195.798935</td>
+      <td>88.776749</td>
+      <td>0.891303</td>
+      <td>13842</td>
+      <td>0.572343</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1368</th>
+      <td>15547</td>
+      <td>501.804993</td>
+      <td>208.499176</td>
+      <td>95.807861</td>
+      <td>0.888172</td>
+      <td>15867</td>
+      <td>0.598284</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>359</th>
+      <td>15074</td>
+      <td>497.178009</td>
+      <td>205.639816</td>
+      <td>94.622200</td>
+      <td>0.887849</td>
+      <td>15536</td>
+      <td>0.721106</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>131</th>
+      <td>11386</td>
+      <td>450.119995</td>
+      <td>195.460434</td>
+      <td>75.842888</td>
+      <td>0.921650</td>
+      <td>11612</td>
+      <td>0.512860</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>2934</th>
+      <td>10550</td>
+      <td>404.295013</td>
+      <td>160.470123</td>
+      <td>85.450035</td>
+      <td>0.846431</td>
+      <td>10846</td>
+      <td>0.779806</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>669</th>
+      <td>14289</td>
+      <td>502.813995</td>
+      <td>216.608383</td>
+      <td>85.569382</td>
+      <td>0.918663</td>
+      <td>14612</td>
+      <td>0.541004</td>
+      <td>Cammeo</td>
+    </tr>
+  </tbody>
+</table>
+<p>3048 rows × 8 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B3</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">B3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Area</th>
+      <th>Perimeter</th>
+      <th>Major_Axis_Length</th>
+      <th>Minor_Axis_Length</th>
+      <th>Eccentricity</th>
+      <th>Convex_Area</th>
+      <th>Extent</th>
+      <th>Class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1385</th>
+      <td>14865</td>
+      <td>495.071014</td>
+      <td>202.867859</td>
+      <td>94.271950</td>
+      <td>0.885470</td>
+      <td>15235</td>
+      <td>0.604195</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>968</th>
+      <td>13350</td>
+      <td>466.618988</td>
+      <td>196.508972</td>
+      <td>87.161552</td>
+      <td>0.896250</td>
+      <td>13562</td>
+      <td>0.799210</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>3149</th>
+      <td>11884</td>
+      <td>434.839996</td>
+      <td>172.126083</td>
+      <td>89.208092</td>
+      <td>0.855216</td>
+      <td>12184</td>
+      <td>0.629583</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3771</th>
+      <td>10516</td>
+      <td>409.557007</td>
+      <td>168.520233</td>
+      <td>80.240913</td>
+      <td>0.879364</td>
+      <td>10726</td>
+      <td>0.636408</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>2958</th>
+      <td>11700</td>
+      <td>436.928986</td>
+      <td>179.574844</td>
+      <td>83.983955</td>
+      <td>0.883897</td>
+      <td>11980</td>
+      <td>0.738543</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2187</th>
+      <td>12638</td>
+      <td>454.561005</td>
+      <td>187.569366</td>
+      <td>86.984962</td>
+      <td>0.885967</td>
+      <td>12902</td>
+      <td>0.768595</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>3695</th>
+      <td>11619</td>
+      <td>432.454010</td>
+      <td>178.341507</td>
+      <td>83.913452</td>
+      <td>0.882389</td>
+      <td>11824</td>
+      <td>0.767640</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>785</th>
+      <td>14115</td>
+      <td>483.779999</td>
+      <td>206.841873</td>
+      <td>88.068649</td>
+      <td>0.904828</td>
+      <td>14312</td>
+      <td>0.747656</td>
+      <td>Cammeo</td>
+    </tr>
+    <tr>
+      <th>2551</th>
+      <td>8505</td>
+      <td>359.100006</td>
+      <td>147.798889</td>
+      <td>73.808685</td>
+      <td>0.866380</td>
+      <td>8651</td>
+      <td>0.677258</td>
+      <td>Osmancik</td>
+    </tr>
+    <tr>
+      <th>399</th>
+      <td>12667</td>
+      <td>454.239180</td>
+      <td>188.776222</td>
+      <td>86.313750</td>
+      <td>0.886871</td>
+      <td>12952</td>
+      <td>0.661934</td>
+      <td>Cammeo</td>
+    </tr>
+  </tbody>
+</table>
+<p>3048 rows × 8 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="modelling-with-naives-bayes">
+<h3>Modelling with Naives Bayes<a class="headerlink" href="#modelling-with-naives-bayes" title="Link to this heading">#</a></h3>
+<p>Make three Naives Bayes model as estimator to use in BaggingClassifiers</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B1_x</span> <span class="o">=</span> <span class="n">B1</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Class&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">B1_y</span> <span class="o">=</span> <span class="n">B1</span><span class="p">[</span><span class="s1">&#39;Class&#39;</span><span class="p">]</span>
+
+<span class="n">M1</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">M1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">B1_x</span><span class="p">,</span> <span class="n">B1_y</span><span class="p">)</span>
+
+<span class="c1"># saving model with joblib</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="s1">&#39;bagging/m1.joblib&#39;</span><span class="p">)</span>
+
+<span class="n">M1_predict</span> <span class="o">=</span> <span class="n">M1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+
+<span class="n">M1_result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">M1_predict</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P1&#39;</span><span class="p">])</span>
+
+<span class="c1"># M1.score(x_test, y_test)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B2_x</span> <span class="o">=</span> <span class="n">B2</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Class&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">B2_y</span> <span class="o">=</span> <span class="n">B2</span><span class="p">[</span><span class="s1">&#39;Class&#39;</span><span class="p">]</span>
+
+<span class="n">M2</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">M2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">B2_x</span><span class="p">,</span> <span class="n">B2_y</span><span class="p">)</span>
+
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">M2</span><span class="p">,</span> <span class="s1">&#39;bagging/m2.joblib&#39;</span><span class="p">)</span>
+
+<span class="n">M2_predict</span> <span class="o">=</span> <span class="n">M2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+
+<span class="n">M2_result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">M2_predict</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P2&#39;</span><span class="p">])</span>
+
+<span class="c1"># M2.score(x_test, y_test)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B3_x</span> <span class="o">=</span> <span class="n">B3</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Class&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">B3_y</span> <span class="o">=</span> <span class="n">B3</span><span class="p">[</span><span class="s1">&#39;Class&#39;</span><span class="p">]</span>
+
+<span class="n">M3</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">M3</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">B3_x</span><span class="p">,</span> <span class="n">B3_y</span><span class="p">)</span>
+
+<span class="c1"># saving model with joblib</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">M3</span><span class="p">,</span> <span class="s1">&#39;bagging/m3.joblib&#39;</span><span class="p">)</span>
+
+<span class="n">M3_predict</span> <span class="o">=</span> <span class="n">M3</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+
+<span class="n">M3_result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">M3_predict</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P3&#39;</span><span class="p">])</span>
+
+<span class="c1"># M3.score(x_test, y_test)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h3>Change categorical to numeric<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_combined</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">M1_result</span><span class="p">,</span> <span class="n">M2_result</span><span class="p">,</span> <span class="n">M3_result</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># x_combined</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">x_combined</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">,</span><span class="s2">&quot;P2&quot;</span><span class="p">,</span> <span class="s2">&quot;P3&quot;</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">,</span><span class="s2">&quot;P2&quot;</span><span class="p">,</span> <span class="s2">&quot;P3&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+
+<span class="n">X</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>P1_Cammeo</th>
+      <th>P1_Osmancik</th>
+      <th>P2_Cammeo</th>
+      <th>P2_Osmancik</th>
+      <th>P3_Cammeo</th>
+      <th>P3_Osmancik</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3043</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3044</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3045</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3046</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3047</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>3048 rows × 6 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="make-aggregation">
+<h3>Make aggregation<a class="headerlink" href="#make-aggregation" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf_knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">clf_knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># saving model with joblib</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">clf_knn</span><span class="p">,</span> <span class="s1">&#39;bagging/aggregation.joblib&#39;</span><span class="p">)</span>
+
+<span class="c1"># result = clf_nb.predict(X_train)</span>
+<span class="c1"># result</span>
+
+<span class="n">clf_knn</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8982939632545932
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>Make prediction function<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">baggingClassifier</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+  <span class="n">B1</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">B2</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">B3</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+  <span class="n">B1_x</span> <span class="o">=</span> <span class="n">B1</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Class&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">B1_y</span> <span class="o">=</span> <span class="n">B1</span><span class="p">[</span><span class="s1">&#39;Class&#39;</span><span class="p">]</span>
+
+  <span class="n">M1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">B1_x</span><span class="p">,</span> <span class="n">B1_y</span><span class="p">)</span>
+  <span class="n">M1_predict</span> <span class="o">=</span> <span class="n">M1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="n">M1_result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">M1_predict</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P1&#39;</span><span class="p">])</span>
+
+  <span class="n">B2_x</span> <span class="o">=</span> <span class="n">B2</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Class&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">B2_y</span> <span class="o">=</span> <span class="n">B2</span><span class="p">[</span><span class="s1">&#39;Class&#39;</span><span class="p">]</span>
+
+  <span class="n">M2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">B2_x</span><span class="p">,</span> <span class="n">B2_y</span><span class="p">)</span>
+  <span class="n">M2_predict</span> <span class="o">=</span> <span class="n">M2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="n">M2_result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">M2_predict</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P2&#39;</span><span class="p">])</span>
+
+  <span class="n">B3_x</span> <span class="o">=</span> <span class="n">B3</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Class&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">B3_y</span> <span class="o">=</span> <span class="n">B3</span><span class="p">[</span><span class="s1">&#39;Class&#39;</span><span class="p">]</span>
+
+  <span class="n">M3</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">B3_x</span><span class="p">,</span> <span class="n">B3_y</span><span class="p">)</span>
+  <span class="n">M3_predict</span> <span class="o">=</span> <span class="n">M3</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="n">M3_result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">M3_predict</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P3&#39;</span><span class="p">])</span>
+
+  <span class="n">x_combined</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">M1_result</span><span class="p">,</span> <span class="n">M2_result</span><span class="p">,</span> <span class="n">M3_result</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">x_predict</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">x_combined</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">,</span><span class="s2">&quot;P2&quot;</span><span class="p">,</span> <span class="s2">&quot;P3&quot;</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">,</span><span class="s2">&quot;P2&quot;</span><span class="p">,</span> <span class="s2">&quot;P3&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="s1">&#39;P1_Cammeo&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x_predict</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">&#39;P2_Cammeo&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x_predict</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">&#39;P3_Cammeo&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x_predict</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">x_predict</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;P1_Cammeo&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">x_predict</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;P2_Cammeo&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">x_predict</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;P3_Cammeo&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="s1">&#39;P1_Osmancik&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x_predict</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">&#39;P2_Osmancik&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x_predict</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">&#39;P3_Osmancik&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x_predict</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">x_predict</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;P1_Osmancik&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">x_predict</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;P2_Osmancik&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">x_predict</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;P3_Osmancik&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+
+  <span class="n">clf_knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">clf_knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_predict</span><span class="p">),</span> <span class="n">clf_knn</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Class&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">prediction</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="n">baggingClassifier</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;prediction : </span><span class="si">{</span><span class="n">prediction</span><span class="si">}</span><span class="s1">, accuration : </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>prediction : [&#39;Osmancik&#39;], accuration : 0.8982939632545932
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="evaluasi">
+<h1>Evaluasi<a class="headerlink" href="#evaluasi" title="Link to this heading">#</a></h1>
+<p>Dari beberapa tahapan pengerjaan yang telah kita lalui, kami mendapatkan kesimpulan bahwa hasil yang terbaik untuk di bawa ke tahapan selanjutnya adalah dengan menggunakan model dari stacking.</p>
+<p>Dapat dilihat kembali hasil akurasi stacking lebih tinggi daripada akurasi bagging, yaitu akurasi stacking 0.9186351706036745 sedangkan akurasi bagging 0.8982939632545932</p>
+<a style='text-decoration:none;line-height:16px;display:flex;color:#5B5B62;padding:10px;justify-content:end;' href='https://deepnote.com?utm_source=created-in-deepnote-cell&projectId=da87ea09-e6e3-41cc-8c74-e3765754d843' target="_blank">
+<img alt='Created in deepnote.com' style='display:inline;max-height:16px;margin:0px;margin-right:7.5px;' src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iODBweCIgaGVpZ2h0PSI4MHB4IiB2aWV3Qm94PSIwIDAgODAgODAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDU0LjEgKDc2NDkwKSAtIGh0dHBzOi8vc2tldGNoYXBwLmNvbSAtLT4KICAgIDx0aXRsZT5Hcm91cCAzPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGcgaWQ9IkxhbmRpbmciIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJBcnRib2FyZCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEyMzUuMDAwMDAwLCAtNzkuMDAwMDAwKSI+CiAgICAgICAgICAgIDxnIGlkPSJHcm91cC0zIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjM1LjAwMDAwMCwgNzkuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICA8cG9seWdvbiBpZD0iUGF0aC0yMCIgZmlsbD0iIzAyNjVCNCIgcG9pbnRzPSIyLjM3NjIzNzYyIDgwIDM4LjA0NzY2NjcgODAgNTcuODIxNzgyMiA3My44MDU3NTkyIDU3LjgyMTc4MjIgMzIuNzU5MjczOSAzOS4xNDAyMjc4IDMxLjY4MzE2ODMiPjwvcG9seWdvbj4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0zNS4wMDc3MTgsODAgQzQyLjkwNjIwMDcsNzYuNDU0OTM1OCA0Ny41NjQ5MTY3LDcxLjU0MjI2NzEgNDguOTgzODY2LDY1LjI2MTk5MzkgQzUxLjExMjI4OTksNTUuODQxNTg0MiA0MS42NzcxNzk1LDQ5LjIxMjIyODQgMjUuNjIzOTg0Niw0OS4yMTIyMjg0IEMyNS40ODQ5Mjg5LDQ5LjEyNjg0NDggMjkuODI2MTI5Niw0My4yODM4MjQ4IDM4LjY0NzU4NjksMzEuNjgzMTY4MyBMNzIuODcxMjg3MSwzMi41NTQ0MjUgTDY1LjI4MDk3Myw2Ny42NzYzNDIxIEw1MS4xMTIyODk5LDc3LjM3NjE0NCBMMzUuMDA3NzE4LDgwIFoiIGlkPSJQYXRoLTIyIiBmaWxsPSIjMDAyODY4Ij48L3BhdGg+CiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMCwzNy43MzA0NDA1IEwyNy4xMTQ1MzcsMC4yNTcxMTE0MzYgQzYyLjM3MTUxMjMsLTEuOTkwNzE3MDEgODAsMTAuNTAwMzkyNyA4MCwzNy43MzA0NDA1IEM4MCw2NC45NjA0ODgyIDY0Ljc3NjUwMzgsNzkuMDUwMzQxNCAzNC4zMjk1MTEzLDgwIEM0Ny4wNTUzNDg5LDc3LjU2NzA4MDggNTMuNDE4MjY3Nyw3MC4zMTM2MTAzIDUzLjQxODI2NzcsNTguMjM5NTg4NSBDNTMuNDE4MjY3Nyw0MC4xMjg1NTU3IDM2LjMwMzk1NDQsMzcuNzMwNDQwNSAyNS4yMjc0MTcsMzcuNzMwNDQwNSBDMTcuODQzMDU4NiwzNy43MzA0NDA1IDkuNDMzOTE5NjYsMzcuNzMwNDQwNSAwLDM3LjczMDQ0MDUgWiIgaWQ9IlBhdGgtMTkiIGZpbGw9IiMzNzkzRUYiPjwvcGF0aD4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+' > </img>
+Created in <span style='font-weight:600;margin-left:4px;'>Deepnote</span></a><div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="author.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">About The Author</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">GAUSSSIAN NAIVE BAYES CLASSIFICATION FOR PREDICTION ON RICE (OSMANCIK AND CAMMEO)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">TUJUAN</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">DATA UNDERSTANDING</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengumpulkan-data">MENGUMPULKAN DATA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mencari-data">Mencari Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menarik-data">Menarik Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memahami-data">MEMAHAMI DATA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-data">Deskripsi Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-fitur">Penjelasan Fitur</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-data">PLOTTING DATA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-distribution">Data Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-distribution">2D Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data">EKSPLORASI DATA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kualitas-data">KUALITAS DATA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-value">Missing Value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier-data">Outlier Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">DATA PREPROCESSING</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-outlier-factor">Local Outlier Factor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-outliers">Check Outliers</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-modeling">DATA MODELING</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-naive-bayes-classification">GAUSSIAN NAIVE BAYES CLASSIFICATION</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knn">KNN</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-learning">ENSEMBLE LEARNING</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacking-classifier">Stacking Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-knn-model-with-n-3">Make KNN model with n = 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-knn-model-with-n-5">Make KNN model with n = 5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#change-categorical-to-numeric">Change categorical to numeric</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-gaussian-naives-bayes-as-meta-classifiers">Modelling Gaussian Naives Bayes as Meta Classifiers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-prediction-function">Make prediction function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-test">Prediction test</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-classifier">Bagging Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-bootstrap-sample-data">Make bootstrap sample data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-with-naives-bayes">Modelling with Naives Bayes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Change categorical to numeric</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-aggregation">Make aggregation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Make prediction function</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi">Evaluasi</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

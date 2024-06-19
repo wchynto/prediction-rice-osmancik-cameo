@@ -1,0 +1,2 @@
+openpyxl
+category_encoders==2.6.3
