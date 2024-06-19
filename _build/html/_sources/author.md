@@ -68,7 +68,7 @@
   <td>
     <ul>
       <li> Nganjuk</li>
-      <li> 220411100155</li>
+      <li> 220411100147</li>
       <li> Teknik Informatika</li>
       <li> Universitas Trunojoyo Madura</li>
     </ul>
